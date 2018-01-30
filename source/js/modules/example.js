@@ -111,7 +111,7 @@ const execElement = function ( $element ) {
     const elementData = $element.data();
 
     // Misc:
-    console.log( "Look ma, there's an element, and its data attributes!" );
+    console.log( `Look ma, there's an element, and its data attributes!` );
     console.log( $element );
     console.log( elementData );
 };
@@ -131,10 +131,9 @@ const initElement = function ( ) {
     let i = $notLoaded.length;
 
     for ( i; i--; ) {
-
         $element = $_jsElements.eq( i );
 
-        $element.addClass( "is-initialized" ).find("em").addClass("-em");
+        $element.addClass( "is-initialized" );
 
         execElement( $element );
     }

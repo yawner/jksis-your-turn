@@ -16,7 +16,7 @@ $path-to-assets: "/s/";
 /******************************************************************************
  * Fonts
 *******************************************************************************/
-$sans-text: sans-serif;
+$sans-text: futura-pt, "Futura", "Trebuchet", sans-serif;
 $serif-text: serif;
 
 
@@ -42,9 +42,17 @@ $color-background-color: #151515;
 $color-background-accent: #353535;
 
 // simple way to keep a reference of brand palette colors
-$color-brand-black: #252525;
-$color-brand-blue: #435E9F;
+$color-brand-primary: #8b2332;
+$color-brand-blue: #0048a5;
 
+
+/******************************************************************************
+ * Modular Scale (see docs at modularscale.com)
+*******************************************************************************/
+$modularscale: (
+  base: 20px,
+  ratio: 1.225
+);
 
 
 /******************************************************************************

@@ -23,6 +23,9 @@
  * Colors
 *******************************************************************************/
 /******************************************************************************
+ * Modular Scale (see docs at modularscale.com)
+*******************************************************************************/
+/******************************************************************************
  * Grid
 *******************************************************************************/
 /******************************************************************************
@@ -425,10 +428,16 @@
 .-text--left {
   text-align: left; }
 
-em.-em {
+.-em {
   font-family: mrs-eaves;
+  font-size: 1.2125em;
   font-style: italic;
   font-weight: 400; }
+
+.-strong {
+  font-family: futura-pt-bold;
+  font-weight: 700;
+  font-style: normal; }
 
 /******************************************************************************
  * Visibility
@@ -458,6 +467,9 @@ em.-em {
   display: none; }
 
 /******************************************************************************
+ * Modular Scale for Typography & Sizing
+*******************************************************************************/
+/******************************************************************************
  * Modules
 *******************************************************************************/
 /******************************************************************************
@@ -472,6 +484,9 @@ em.-em {
  * Custom CSS styles that relate to the header area.
  * Note: Not all Squarespace templates have the same classes/IDs.
 *******************************************************************************/
+#landing .sqs-block-code {
+  padding: 0; }
+
 /******************************************************************************
  * Videos
  *
@@ -508,6 +523,18 @@ em.-em {
  *
  * Custom CSS styles that relate to Squarespace Image Blocks.
 *******************************************************************************/
+.sqs-block-form .form-wrapper .form-inner-wrapper {
+  color: #0048a5; }
+  .sqs-block-form .form-wrapper .form-inner-wrapper .field-list .field .caption {
+    font-size: 16px; }
+  .sqs-block-form .form-wrapper .form-inner-wrapper .field-list .field .field-element {
+    background: #f6f6f6;
+    border-color: #0048a5;
+    border-radius: 2px;
+    border-width: 0 0 2px 0; }
+  .sqs-block-form .form-wrapper .form-inner-wrapper .field-list .field.select .title {
+    display: inline-block; }
+
 /******************************************************************************
  * Collections
 *******************************************************************************/

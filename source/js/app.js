@@ -12,6 +12,8 @@ require( "../sass/app.scss" );
 
 import * as core from "./core";
 import * as sqs from "./sqs";
+import fonts from "./modules/fonts";
+import interactions from "./modules/interactions";
 import example from "./modules/example";
 
 
@@ -26,6 +28,8 @@ class App {
     constructor () {
         this.core = core;
         this.sqs = sqs;
+        this.fonts = fonts;
+        this.interactions = interactions;
         this.example = example;
 
         this.initModules();

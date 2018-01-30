@@ -3,4 +3,22 @@
  *
  * Custom CSS styles that relate to Squarespace Image Blocks.
 *******************************************************************************/
-.sqs-block-form {}
+.sqs-block-form .form-wrapper .form-inner-wrapper {
+	color: $color-brand-blue;
+	.field-list {
+		.field {
+			.caption {
+				font-size: 16px;
+			}
+			.field-element {
+				background: #f6f6f6;
+				border-color: $color-brand-blue;
+				border-radius: 2px;
+				border-width: 0 0 2px 0;
+			}
+		}
+		.field.select .title {
+			display: inline-block;
+		}
+	}
+}

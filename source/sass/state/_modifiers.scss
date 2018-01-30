@@ -61,10 +61,17 @@
 .-text--left {
     text-align: left;
 }
-em.-em {
+//typekit font classes toggled dynamically by js
+.-em {
     font-family: mrs-eaves;
+    font-size: 1.2125em;
     font-style: italic;
     font-weight: 400;
+}
+.-strong {
+    font-family: futura-pt-bold;
+    font-weight: 700;
+    font-style: normal;
 }
 
 

@@ -63,7 +63,15 @@
 	
 	var sqs = _interopRequireWildcard(_sqs);
 	
-	var _example = __webpack_require__(/*! ./modules/example */ 32);
+	var _fonts = __webpack_require__(/*! ./modules/fonts */ 32);
+	
+	var _fonts2 = _interopRequireDefault(_fonts);
+	
+	var _interactions = __webpack_require__(/*! ./modules/interactions */ 33);
+	
+	var _interactions2 = _interopRequireDefault(_interactions);
+	
+	var _example = __webpack_require__(/*! ./modules/example */ 34);
 	
 	var _example2 = _interopRequireDefault(_example);
 	
@@ -81,7 +89,7 @@
 	 * This is removed from your final JavaScript build.
 	 *
 	 */
-	__webpack_require__(/*! ../sass/app.scss */ 33);
+	__webpack_require__(/*! ../sass/app.scss */ 35);
 	
 	/**
 	 *
@@ -96,6 +104,8 @@
 	
 	    this.core = core;
 	    this.sqs = sqs;
+	    this.fonts = _fonts2.default;
+	    this.interactions = _interactions2.default;
 	    this.example = _example2.default;
 	
 	    this.initModules();
@@ -2956,9 +2966,9 @@
 
 /***/ }),
 /* 14 */
-/*!*****************************************************************!*\
-  !*** ./~/properjs-hobo/~/properjs-matchelement/matchElement.js ***!
-  \*****************************************************************/
+/*!*************************************************!*\
+  !*** ./~/properjs-matchelement/matchElement.js ***!
+  \*************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*!
@@ -3932,6 +3942,111 @@
 
 /***/ }),
 /* 32 */
+/*!************************************!*\
+  !*** ./source/js/modules/fonts.js ***!
+  \************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _core = __webpack_require__(/*! ../core */ 1);
+	
+	var core = _interopRequireWildcard(_core);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	/**
+	 *
+	 * @public
+	 * @module fonts
+	 * @description Hook module for making cosmetic fixes to DOM after Typekit fonts load.
+	 *
+	 */
+	var fonts = function fonts() {
+		/**
+	 *
+	 * @public
+	 * @method paintFonts
+	 * @memberof fonts
+	 * @description Method queries DOM for active fonts class from Typekit then adds italic & bold classes.
+	 *
+	 */
+		var $_wfActive = core.dom.html.find(".wf-active");
+		var $em = document.querySelectorAll("em");
+		var $strong = document.querySelectorAll("strong");
+	
+		if ($_wfActive !== null) {
+			Array.prototype.forEach.call($em, function (el, i) {
+				var className = "-em";
+	
+				if (el.classList) el.classList.add(className);else el.className += " " + className;
+			});
+			Array.prototype.forEach.call($strong, function (el, i) {
+				var className = "-strong";
+	
+				if (el.classList) el.classList.add(className);else el.className += " " + className;
+			});
+		}
+	};
+	
+	fonts();
+	
+	/******************************************************************************
+	 * Export
+	*******************************************************************************/
+	exports.default = fonts;
+
+/***/ }),
+/* 33 */
+/*!*******************************************!*\
+  !*** ./source/js/modules/interactions.js ***!
+  \*******************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _core = __webpack_require__(/*! ../core */ 1);
+	
+	var core = _interopRequireWildcard(_core);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	/**
+	 *
+	 * @public
+	 * @module interactions
+	 * @description Hook module for interactions on buttons, charts and forms.
+	 *
+	 */
+	var interactions = function interactions() {
+	  /**
+	  *
+	  * @public
+	  * @method paintFonts
+	  * @memberof fonts
+	  * @description Method queries DOM for active fonts class from Typekit then adds italic & bold classes.
+	  *
+	  */
+	
+	};
+	
+	interactions();
+	
+	/******************************************************************************
+	 * Export
+	*******************************************************************************/
+	exports.default = interactions;
+
+/***/ }),
+/* 34 */
 /*!**************************************!*\
   !*** ./source/js/modules/example.js ***!
   \**************************************/
@@ -4078,10 +4193,9 @@
 	    var i = $notLoaded.length;
 	
 	    for (i; i--;) {
-	
 	        $element = $_jsElements.eq(i);
 	
-	        $element.addClass("is-initialized").find("em").addClass("-em");
+	        $element.addClass("is-initialized");
 	
 	        execElement($element);
 	    }
@@ -4093,7 +4207,7 @@
 	exports.default = example;
 
 /***/ }),
-/* 33 */
+/* 35 */
 /*!******************************!*\
   !*** ./source/sass/app.scss ***!
   \******************************/
