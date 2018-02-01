@@ -47,6 +47,7 @@ class App {
      */
     initModules () {
         this.example.init( this );
+        //this.fonts.init( this );
     }
 }
 

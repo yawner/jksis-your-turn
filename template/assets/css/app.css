@@ -23,7 +23,9 @@
  * Colors
 *******************************************************************************/
 /******************************************************************************
- * Modular Scale (see docs at modularscale.com)
+ * Modular Scale 
+ * (see docs at https://github.com/modularscale/modularscale-sass 
+ *  or modularscale.com)
 *******************************************************************************/
 /******************************************************************************
  * Grid
@@ -374,6 +376,64 @@
           mask-position: 0 0; }
 
 /******************************************************************************
+ * Tablet & Mobile
+ *
+ * This is for media queries that override Squarespace's mobile styles.
+*******************************************************************************/
+@media screen and (max-width: 640px) {
+  body {
+    font-size: 18px; }
+  h1 {
+    font-size: 68px;
+    text-align: center; }
+  h2 {
+    font-size: 55px;
+    text-align: center; }
+  h3 {
+    font-size: 25px;
+    letter-spacing: 4px;
+    text-align: center; }
+  #landing .Index-page-content .sqs-block-html h1, #landing .Index-page-content .sqs-block-html p {
+    text-align: left; }
+  .sqs-block-image .design-layout-collage .image-card-wrapper .image-card {
+    padding: 30px; }
+    .sqs-block-image .design-layout-collage .image-card-wrapper .image-card .image-title-wrapper .image-title p {
+      font-size: 45px; }
+    .sqs-block-image .design-layout-collage .image-card-wrapper .image-card .image-subtitle-wrapper .image-subtitle p {
+      font-size: 20px; }
+  .sqs-block-image .design-layout-collage:not(.sqs-narrow-width) {
+    display: block; }
+    .sqs-block-image .design-layout-collage:not(.sqs-narrow-width) > div:first-child {
+      width: 100%; }
+    .sqs-block-image .design-layout-collage:not(.sqs-narrow-width).image-position-left > div:first-child > div {
+      width: 100%; }
+    .sqs-block-image .design-layout-collage:not(.sqs-narrow-width).image-position-right > div:first-child > div {
+      left: 0;
+      width: 100%; }
+    .sqs-block-image .design-layout-collage:not(.sqs-narrow-width) .image-card-wrapper {
+      margin: 0;
+      width: 100%; }
+      .sqs-block-image .design-layout-collage:not(.sqs-narrow-width) .image-card-wrapper .image-card {
+        width: 100%;
+        margin: -13.75% 0 0 0;
+        z-index: 10; }
+  .sqs-block-image .design-layout-card:not(.sqs-narrow-width) {
+    display: block; }
+    .sqs-block-image .design-layout-card:not(.sqs-narrow-width) .image-card-wrapper {
+      width: 100%; }
+      .sqs-block-image .design-layout-card:not(.sqs-narrow-width) .image-card-wrapper .image-card {
+        padding: 0; }
+        .sqs-block-image .design-layout-card:not(.sqs-narrow-width) .image-card-wrapper .image-card .image-title-wrapper {
+          padding: 0; }
+        .sqs-block-image .design-layout-card:not(.sqs-narrow-width) .image-card-wrapper .image-card .image-subtitle-wrapper {
+          padding: 0; }
+    .sqs-block-image .design-layout-card:not(.sqs-narrow-width) > div:first-child {
+      margin: 0 auto;
+      width: 82.791%; }
+    .sqs-block-image .design-layout-card:not(.sqs-narrow-width).image-position-left .image-card-wrapper {
+      margin: 0 auto; } }
+
+/******************************************************************************
  * UI & State
 *******************************************************************************/
 /******************************************************************************
@@ -467,9 +527,6 @@
   display: none; }
 
 /******************************************************************************
- * Modular Scale for Typography & Sizing
-*******************************************************************************/
-/******************************************************************************
  * Modules
 *******************************************************************************/
 /******************************************************************************
@@ -529,9 +586,11 @@
     font-size: 16px; }
   .sqs-block-form .form-wrapper .form-inner-wrapper .field-list .field .field-element {
     background: #f6f6f6;
-    border-color: #0048a5;
+    border-color: #c9c9c9 #c9c9c9 #0048a5;
     border-radius: 2px;
-    border-width: 0 0 2px 0; }
+    border-width: 2px; }
+    .sqs-block-form .form-wrapper .form-inner-wrapper .field-list .field .field-element:focus {
+      border-color: #0069f2; }
   .sqs-block-form .form-wrapper .form-inner-wrapper .field-list .field.select .title {
     display: inline-block; }
 

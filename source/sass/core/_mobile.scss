@@ -1,0 +1,94 @@
+/******************************************************************************
+ * Tablet & Mobile
+ *
+ * This is for media queries that override Squarespace's mobile styles.
+*******************************************************************************/
+@media screen and (max-width: $break-mobile-full) {
+
+	//type overrides
+	body {
+		font-size: 18px;
+	}
+	h1 {
+		font-size: ms(6);
+		text-align: center;
+	}
+	h2 {
+		font-size: ms(5);
+		text-align: center;
+	}
+	h3 {
+		font-size: ms(1);
+		letter-spacing: ms(-8);
+		text-align: center;
+	}
+	//Home page
+	#landing .Index-page-content {
+		.sqs-block-html {
+			h1, p {
+				text-align: left;
+			}
+		}
+	}
+	//Blocks
+	.sqs-block-image {
+		//Collage image blocks
+		.design-layout-collage {
+			.image-card-wrapper .image-card {
+				padding: ms(2);
+				.image-title-wrapper .image-title p {
+					font-size: ms(4);
+				}
+				.image-subtitle-wrapper .image-subtitle p {
+					font-size: ms(0);
+				}
+			}
+			&:not(.sqs-narrow-width) {
+				display: block;
+				&>div:first-child {
+					width: 100%;
+				}
+				&.image-position-left>div:first-child>div {
+					width: 100%;
+				}
+				&.image-position-right>div:first-child>div {
+					left: 0;
+					width: 100%;
+				}
+				.image-card-wrapper {
+					margin: 0;
+					width: 100%;
+					.image-card {
+						width: 100%;
+						margin: -13.75% 0 0 0;
+						z-index: $z_layer_01;
+					}
+				}
+			}
+		}
+		//Card image blocks
+		.design-layout-card:not(.sqs-narrow-width) {
+			display: block;
+			.image-card-wrapper {
+				width: 100%;
+				.image-card {
+					padding: 0;
+					.image-title-wrapper {
+						padding: 0;
+					}
+					.image-subtitle-wrapper {
+						padding: 0;
+					}
+				}
+			}
+			&>div:first-child {
+				margin: 0 auto;
+				width: 82.791%;
+			}
+			&.image-position-left .image-card-wrapper {
+				margin: 0 auto;
+			}
+		}
+	}
+
+}

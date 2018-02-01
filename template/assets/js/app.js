@@ -126,6 +126,7 @@
 	    key: "initModules",
 	    value: function initModules() {
 	      this.example.init(this);
+	      //this.fonts.init( this );
 	    }
 	  }]);
 	
@@ -2966,9 +2967,9 @@
 
 /***/ }),
 /* 14 */
-/*!*************************************************!*\
-  !*** ./~/properjs-matchelement/matchElement.js ***!
-  \*************************************************/
+/*!*****************************************************************!*\
+  !*** ./~/properjs-hobo/~/properjs-matchelement/matchElement.js ***!
+  \*****************************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*!
@@ -4010,12 +4011,18 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 	
 	var _core = __webpack_require__(/*! ../core */ 1);
 	
 	var core = _interopRequireWildcard(_core);
+	
+	var _properjsHobo = __webpack_require__(/*! properjs-hobo */ 9);
+	
+	var _properjsHobo2 = _interopRequireDefault(_properjsHobo);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -4027,15 +4034,32 @@
 	 *
 	 */
 	var interactions = function interactions() {
-	  /**
-	  *
-	  * @public
-	  * @method paintFonts
-	  * @memberof fonts
-	  * @description Method queries DOM for active fonts class from Typekit then adds italic & bold classes.
-	  *
-	  */
+		/**
+	 *
+	 * @public
+	 * @method applyButton
+	 * @memberof fonts
+	 * @description Method adds undergrad & grad buttons to container when apply button is clicked.
+	 *
+	 */
+		var applyBtn = (0, _properjsHobo2.default)("a[href='#apply']");
+		var btnContainer = (0, _properjsHobo2.default)("#landing .Index-page-content .sqs-block-button");
+		var newBtns = '<div class="sqs-block-button-container--left" data-alignment="left" data-button-size="small">' + '<a href="https://www.du.edu/admission-aid/undergraduate/index.html" target="_blank" class="sqs-block-button-element--small sqs-block-button-element" style="margin:0 17px 17px 0;">Undergraduate</a>' + '<a href="https://www.du.edu/korbel/admission/apply.html" target="_blank" class="sqs-block-button-element--small sqs-block-button-element" style="margin:0 0 17px 0;">Graduate</a>' + '</div>';
 	
+		var appendBtns = function appendBtns() {
+			debugger;
+			applyBtn.remove();
+			btnContainer.append(newBtns);
+		};
+	
+		var applyClick = function applyClick(list, event, fn) {
+			for (var i = 0, len = list.length; i < len; i++) {
+				list[i].addEventListener(event, fn, false);
+			}
+			return false;
+		};
+	
+		applyClick(applyBtn, "click", appendBtns);
 	};
 	
 	interactions();

@@ -12,9 +12,12 @@
 			}
 			.field-element {
 				background: #f6f6f6;
-				border-color: $color-brand-blue;
+				border-color: #c9c9c9 #c9c9c9 $color-brand-blue;
 				border-radius: 2px;
-				border-width: 0 0 2px 0;
+				border-width: 2px;
+				&:focus {
+					border-color: lighten( $color-brand-blue, 15% );
+				}
 			}
 		}
 		.field.select .title {
