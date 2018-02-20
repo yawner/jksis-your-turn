@@ -3,7 +3,10 @@
   "name": "squarespace-template-helper",
   "description": "A structured workflow for customizing JavaScript and CSS on Squarespace templates without Developer mode.",
   "version": "0.3.0",
-  "dependencies": {},
+  "dependencies": {
+    "chart.js": "^2.7.1",
+    "chartjs-plugin-deferred": "^1.0.0"
+  },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
     "babel-core": "^6.13.2",
@@ -59,9 +62,9 @@
   "license": "MIT",
   "contributors": [
     {
-      "name": "Jason Barone",
-      "email": "jason@jasonbarone.com",
-      "url": "http://jasonbarone.com"
+      "name": "Trevor Jahner",
+      "email": "trevor.jahner@du.edu",
+      "url": "https://github.com/yawner"
     }
   ],
   "readmeFilename": "README.md"

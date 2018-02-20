@@ -1,27 +1,70 @@
 /******************************************************************************
  * Squarespace Block - Form
  *
- * Custom CSS styles that relate to Squarespace Image Blocks.
+ * Custom CSS styles that relate to Squarespace Form Blocks & embedded forms (MailChimp).
 *******************************************************************************/
-.sqs-block-form .form-wrapper .form-inner-wrapper {
+.sqs-block-form .form-wrapper .form-inner-wrapper, #mc_embed_signup .form-inner-wrapper {
 	color: $color-brand-blue;
 	.field-list {
 		.field {
+		    width: 100%;
+		    padding-bottom: 0;
 			.caption {
 				font-size: 16px;
 			}
 			.field-element {
 				background: #f6f6f6;
-				border-color: #c9c9c9 #c9c9c9 $color-brand-blue;
+				border-color: #c9c9c9;
 				border-radius: 2px;
 				border-width: 2px;
 				&:focus {
-					border-color: lighten( $color-brand-blue, 15% );
+					border-color: $color-brand-blue;
 				}
 			}
 		}
-		.field.select .title {
-			display: inline-block;
+		.field.select {
+			.title {
+				display: inline-block;
+			}
+			select {
+				margin-left: 2px;
+				width: auto;
+			}
 		}
 	}
+}
+.Site #mc_embed_signup {
+    background: transparent;
+    clear: left;
+    font: 20px futura-pt, Futura, Helvetica, sans-serif;
+    form { padding: 0; }
+    .field-list .fields.name .field {
+    	clear: none;
+    	float: left;
+    	padding-bottom: 0;
+	    width: 48%;
+	}
+    .button {
+	    background-color: #0048a5;
+	    border-color: #0048a5;
+	    border-radius: 0;
+	    border-width: 0;
+		font-family: futura-pt;
+		font-size: 14px;
+	    font-weight: 400;
+	    font-style: normal;
+	    text-transform: uppercase;
+	    letter-spacing: 1.5px;
+	    line-height: 1em;
+	    display: inline-block;
+	    width: auto;
+	    height: auto;
+	    padding: 1em 2.5em;
+	    text-align: center;
+	    cursor: pointer;
+	    outline: none;
+	    &:hover {
+	    	background-color: #336cb7;
+	    }
+    }
 }
