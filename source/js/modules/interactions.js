@@ -27,6 +27,7 @@ const interactions = {
         if ( this.isActive() ) {
             initBtns();
             fillForm( setFormTxt() );
+            formListener();
         }
     },
 
@@ -61,6 +62,7 @@ const interactions = {
     }
 };
 
+
 const initBtns = function ( ) {
     /**
      *
@@ -92,6 +94,7 @@ const initBtns = function ( ) {
 
 };
 
+
 /**
  *
  * @private
@@ -113,18 +116,20 @@ const urlParams = function ( ) {
 
 };
 
+
 /**
  *
  * @private
  * @method fillForm
  * @memberof interactions
- * @description Method prefills select input on form based on url params set by curriculum chart on landing page.
+ * @description Method prefills select option based on url parameters.
  *
  */
 const fillForm = function ( ) {
 
     //Pull in url parameters
     urlParams();
+
     $_interest = $_urlData[ 1 ];
     const $_select = $( $_urlData[ 0 ].toString() );
 
@@ -164,6 +169,67 @@ const setFormTxt = function ( ) {
     } else {
         return;
     }
+
+};
+
+
+/**
+ *
+ * @private
+ * @method formListener
+ * @memberof interactions
+ * @description Method listens for changes to interest select options to adapt to changes.
+ *
+ */
+const formListener = function ( ) {
+
+    //Pull in url parameters
+    urlParams();
+
+    const $_select = $( "#mc-embedded-subscribe-form .select select" );
+
+    const formChange = function ( e ) {
+        //reset select HTML so it can be changed below
+        const $_label = e.currentTarget.parentNode;
+        const $_selectHTML = "I'm interested in&nbsp;<select name=\"CURRICULUM\" class=\"\" id=\"mce-CURRICULUM\">" +
+                                "<option value=\"\"></option>" +
+                                "<option value=\"Quantitative\">Quantitative</option>" +
+                                "<option value=\"Qualitative\">Qualitative</option>" +
+                                "<option value=\"Theory\">Theory</option>" +
+                                "<option value=\"Practice\">Practice</option>" +
+                                "<option value=\"International\">International</option>" +
+                                "<option value=\"Domestic\">Domestic</option>" +
+                             "</select>&nbsp;studies at the Korbel School.";
+
+        $_label.innerHTML = $_selectHTML;
+
+        //get value of selected option
+        $_interest = e.currentTarget.selectedOptions[ 0 ].value;
+
+        if ( $_interest === "Quantitative" || $_interest === "Qualitative" ) {
+            $_label.innerHTML = $_label.innerHTML.replace("studies", "methods");
+        } else if ( $_interest === "Theory" || $_interest === "Practice" ) {
+            $_label.innerHTML = $_label.innerHTML.replace("studies", "");
+        } else {
+            return;
+        }
+
+        //get new (just generated) option HTML
+        $_opts = $("#mce-CURRICULUM option");
+
+        //reset the index to stored select option (from before HTML was changed)
+        for ( let j = 0; j < $_opts.length; j++ ) {
+            if ( $_opts[ j ].value === $_interest ) {
+                $_opts[ j ].parentNode.selectedIndex = j;
+                $_opts[ j ].parentNode.value = $_interest;
+            }
+        }
+
+        //rebind the event to the dynamically created select element
+        $_select.onchange = formListener();
+    };
+
+    $_select.on( "change", formChange );
 
 };
 

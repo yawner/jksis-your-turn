@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Josef Korbel School of International Studies Interactive Curriculum Chart</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	<script>
+		var domReady = function(callback) {
+		  document.readyState === "interactive" || document.readyState === "complete" ? callback() : document.addEventListener("DOMContentLoaded", callback);
+		};
+
+		domReady(function() {
+
+		  //add Korbel text to center of chart
+		  Chart.pluginService.register({
+		    beforeDraw: function(chart) {
+		      var width = chart.chart.width,
+		        height = chart.chart.height,
+		        ctx = chart.chart.ctx;
+
+		      ctx.restore();
+		      var fontSize = (height / 114).toFixed(2);
+		      ctx.font = "600 " + fontSize + "em Futura, sans-serif";
+		      ctx.textBaseline = "top";
+          ctx.fillStyle = '#0048A5';
+
+		      var text = "Korbel",
+		        textX = Math.round((width - ctx.measureText(text).width) / 2),
+		        textY = height / 2.25;
+
+		      ctx.fillText(text, textX, textY);
+		      ctx.save();
+		    }
+		  });
+
+		  //draw chart
+		  var ctx = document.getElementById("chart");
+		  var chart = new Chart(ctx, {
+		    type: 'doughnut',
+		    data: {
+		      labels: [
+		        "Theory",
+		        "International",
+		        "Quantitative",
+		        "Practice",
+		        "Domestic",
+		        "Qualitative"
+		      ],
+		      datasets: [{
+		        data: [10, 10, 10, 10, 10, 10],
+		        backgroundColor: [
+		          '#0BB3E4',
+		          '#0048A5',
+		          '#FDB813',
+		          '#00637B',
+		          '#F26522',
+		          '#7E0032'
+		        ],
+		        borderColor: [
+		          'rgba(255,255,255,1)',
+		          'rgba(255, 255, 255, 1)',
+		          'rgba(255,255,255,1)',
+		          'rgba(255, 255, 255, 1)',
+		          'rgba(255,255,255,1)',
+		          'rgba(255, 255, 255, 1)'
+		        ],
+		        borderWidth: 6
+		      }]
+		    },
+		    options: {
+		      cutoutPercentage: 87.5,
+		      responsive: true,
+          legend: {
+          	display: false
+          },
+		      tooltips: {
+		        callbacks: {
+		          title: function(tooltipItem, data) {
+		            return data['labels'][tooltipItem[0]['index']];
+		          },
+		          label: function(tooltipItem, data) {
+		            return;
+		          }
+		        },
+		        backgroundColor: '#111',
+		        caretSize: 8,
+		        cornerRadius: 2,
+		        titleFontSize: 24,
+		        titleFontColor: '#efefef',
+		        titleFontStyle: 'normal',
+		        titleMarginBottom: 2,
+		        displayColors: false,
+		        xPadding: 24,
+		        yPadding: 24
+		      }
+		    }
+
+		  });
+
+		  document.getElementById("chart").onclick = function(evt) {
+
+		    //get the point clicked on from chartjs API
+		    var activePoints = chart.getElementsAtEvent(evt);
+		    //get segment index from click point & use it to get label
+		    var segIndex = activePoints[0]._index;
+		    var subject = activePoints[0]._chart.config.data.labels[segIndex];
+		    /*
+		     * Convert label to url with hash parameters data-form-id of 
+		     * Squarespace form and curriculum subject that gets decoded
+		     * on ideas page load to pre-fill email newsletter form
+		     *
+		     */
+		    var relUrl = '\/ideas#curriculumForm=' + subject;
+
+		    window.location.href = relUrl;
+
+		  };
+
+
+		});
+	</script>
+</head>
+<body>
+	<canvas id="chart" height="250"></canvas>
+</body>
+</html>

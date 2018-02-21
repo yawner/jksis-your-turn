@@ -71,11 +71,11 @@
 	
 	var _chart2 = _interopRequireDefault(_chart);
 	
-	var _interactions = __webpack_require__(/*! ./modules/interactions */ 208);
+	var _interactions = __webpack_require__(/*! ./modules/interactions */ 209);
 	
 	var _interactions2 = _interopRequireDefault(_interactions);
 	
-	var _example = __webpack_require__(/*! ./modules/example */ 209);
+	var _example = __webpack_require__(/*! ./modules/example */ 210);
 	
 	var _example2 = _interopRequireDefault(_example);
 	
@@ -93,7 +93,7 @@
 	 * This is removed from your final JavaScript build.
 	 *
 	 */
-	__webpack_require__(/*! ../sass/app.scss */ 210);
+	__webpack_require__(/*! ../sass/app.scss */ 211);
 	
 	/**
 	 *
@@ -4083,7 +4083,7 @@
 	
 	var _chart2 = _interopRequireDefault(_chart);
 	
-	__webpack_require__(/*! chartjs-plugin-deferred */ 211);
+	__webpack_require__(/*! chartjs-plugin-deferred */ 208);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -4197,7 +4197,7 @@
 	            },
 	            plugins: {
 	                deferred: {
-	                    delay: 500,
+	                    delay: 375,
 	                    yOffset: "50%"
 	                }
 	            },
@@ -34945,359 +34945,6 @@
 
 /***/ }),
 /* 208 */
-/*!*******************************************!*\
-  !*** ./source/js/modules/interactions.js ***!
-  \*******************************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _properjsHobo = __webpack_require__(/*! properjs-hobo */ 9);
-	
-	var _properjsHobo2 = _interopRequireDefault(_properjsHobo);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var $_applyBtn = null;
-	var $_form = null;
-	var $_hashParams = null;
-	var $_interest = null;
-	var $_opts = null;
-	var $_urlData = null;
-	
-	/**
-	 *
-	 * @public
-	 * @module interactions
-	 * @description Hook module for DOM interactions on buttons, charts and forms.
-	 *
-	 */
-	var interactions = {
-	    /**
-	     *
-	     * @public
-	     * @method init
-	     * @memberof charts
-	     * @description Method runs once when window loads.
-	     *
-	     */
-	    init: function init() {
-	        if (this.isActive()) {
-	            initBtns();
-	            fillForm(setFormTxt());
-	        }
-	    },
-	
-	
-	    /**
-	     *
-	     * @public
-	     * @method isActive
-	     * @memberof charts
-	     * @description Method informs of active status.
-	     * @returns {boolean}
-	     *
-	     */
-	    isActive: function isActive() {
-	        return this.getElements() >= 0;
-	    },
-	
-	
-	    /**
-	     *
-	     * @public
-	     * @method getElements
-	     * @memberof charts
-	     * @description Method queries DOM for this modules node.
-	     * @returns {number}
-	     *
-	     */
-	    getElements: function getElements() {
-	        $_applyBtn = (0, _properjsHobo2.default)("a[href='#apply']");
-	
-	        return $_applyBtn.length;
-	    }
-	};
-	
-	var initBtns = function initBtns() {
-	    /**
-	     *
-	     * @private
-	     * @method applyButton
-	     * @memberof interactions
-	     * @description Method adds undergrad & grad buttons to container when apply button is clicked.
-	     *
-	     */
-	    var btnContainer = (0, _properjsHobo2.default)("#landing .Index-page-content .sqs-block-button");
-	    var newBtns = "<div class=\"sqs-block-button-container--left\" data-alignment=\"left\" data-button-size=\"small\">" + "<a href=\"https://www.du.edu/korbel/admission/apply.html\" target=\"_blank\" class=\"sqs-block-button-element--small sqs-block-button-element\" style=\"margin:0 17px 17px 0;\">Graduate</a>" + "<a href=\"https://www.du.edu/admission-aid/undergraduate/index.html\" target=\"_blank\" class=\"sqs-block-button-element--small sqs-block-button-element\" style=\"margin:0 0 17px 0;\">Undergraduate</a>" + "</div>";
-	
-	    var appendBtns = function appendBtns() {
-	        $_applyBtn.remove();
-	        btnContainer.append(newBtns);
-	    };
-	
-	    var applyClick = function applyClick(list, event, fn) {
-	        for (var i = 0, len = list.length; i < len; i++) {
-	            list[i].addEventListener(event, fn, false);
-	        }
-	        return false;
-	    };
-	
-	    applyClick($_applyBtn, "click", appendBtns);
-	};
-	
-	/**
-	 *
-	 * @private
-	 * @method urlParams
-	 * @memberof interactions
-	 * @description Method gets parameters from url used in prefilling newsletter forms.
-	 * @returns {variable}
-	 *
-	 */
-	var urlParams = function urlParams() {
-	
-	    $_hashParams = window.location.hash.split("&"); // substr(1) to remove the `#`
-	
-	    for (var i = 0, len = $_hashParams.length; i < len; i++) {
-	        $_urlData = $_hashParams[i].split("=");
-	    }
-	
-	    return $_urlData;
-	};
-	
-	/**
-	 *
-	 * @private
-	 * @method fillForm
-	 * @memberof interactions
-	 * @description Method prefills select input on form based on url params set by curriculum chart on landing page.
-	 *
-	 */
-	var fillForm = function fillForm() {
-	
-	    //Pull in url parameters
-	    urlParams();
-	    $_interest = $_urlData[1];
-	    var $_select = (0, _properjsHobo2.default)($_urlData[0].toString());
-	
-	    $_opts = $_select[0].children;
-	
-	    //loop through select options and select the one that matches interest
-	    for (var j = 0; j < $_opts.length; j++) {
-	        if ($_opts[j].value === $_interest) {
-	            $_opts[j].parentNode.selectedIndex = j;
-	        }
-	    }
-	};
-	
-	/**
-	 *
-	 * @private
-	 * @method setFormTxt
-	 * @memberof interactions
-	 * @description Method uses parameter from url to change label text for interest select field.
-	 *
-	 */
-	var setFormTxt = function setFormTxt() {
-	
-	    //Pull in url parameters
-	    urlParams();
-	
-	    $_form = (0, _properjsHobo2.default)("#mc-embedded-subscribe-form");
-	    $_interest = $_urlData[1];
-	    var $_select = (0, _properjsHobo2.default)($_urlData[0].toString());
-	
-	    if ($_interest === "Quantitative" || $_interest === "Qualitative") {
-	        $_select[0].parentNode.innerHTML = $_select[0].parentNode.innerHTML.replace("studies", "methods");
-	    } else if ($_interest === "Theory" || $_interest === "Practice") {
-	        $_select[0].parentNode.innerHTML = $_select[0].parentNode.innerHTML.replace("studies", "");
-	    } else {
-	        return;
-	    }
-	};
-	
-	/******************************************************************************
-	 * Export
-	*******************************************************************************/
-	exports.default = interactions;
-
-/***/ }),
-/* 209 */
-/*!**************************************!*\
-  !*** ./source/js/modules/example.js ***!
-  \**************************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _core = __webpack_require__(/*! ../core */ 1);
-	
-	var core = _interopRequireWildcard(_core);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	// Here's jQuery in case you need it. If you're just doing DOM manipulation, you
-	// probably won't need it. Recommend using core.dom module to handle node caching.
-	// import $ from "jquery/dist/jquery";
-	
-	
-	var $_jsElements = null;
-	
-	/**
-	 *
-	 * @public
-	 * @module example
-	 * @description An example hook module.
-	 *
-	 */
-	// This is a module using an object literal pattern.
-	// It's an easy way to organize your custom JavaScript into modules with methods.
-	// Since this system uses Webpack, you can reuse other modules and dependencies
-	// by importing them into the module.
-	
-	
-	var example = {
-	    /**
-	     *
-	     * @public
-	     * @method init
-	     * @memberof example
-	     * @description Method runs once when window loads.
-	     *
-	     */
-	    init: function init() {
-	        if (this.isActive()) {
-	            initElement();
-	        }
-	        // console.log( "example module: initialized" );
-	    },
-	
-	
-	    /**
-	     *
-	     * @public
-	     * @method isActive
-	     * @memberof example
-	     * @description Method informs of active status.
-	     * @returns {boolean}
-	     *
-	     */
-	    isActive: function isActive() {
-	        return this.getElements() > 0;
-	    },
-	
-	
-	    /**
-	     *
-	     * @public
-	     * @method unload
-	     * @memberof example
-	     * @description Method performs unloading actions for this module.
-	     *
-	     */
-	    unload: function unload() {
-	        // Typically unloading and tearing down isn't required unless you're
-	        // using a complete AJAX Squarespace website that functions like
-	        // a single page application.
-	        this.teardown();
-	    },
-	
-	
-	    /**
-	     *
-	     * @public
-	     * @method teardown
-	     * @memberof example
-	     * @description Method performs cleanup after this module. Removes events, null vars etc...
-	     *
-	     */
-	    teardown: function teardown() {
-	        $_jsElements = null;
-	    },
-	
-	
-	    /**
-	     *
-	     * @public
-	     * @method getElements
-	     * @memberof example
-	     * @description Method queries DOM for this modules node.
-	     * @returns {number}
-	     *
-	     */
-	    getElements: function getElements() {
-	        $_jsElements = core.dom.body.find(".js-element");
-	
-	        return $_jsElements.length;
-	    }
-	};
-	
-	/**
-	 *
-	 * @private
-	 * @method execElement
-	 * @memberof example
-	 * @description Handles execution of something.
-	 * @param {jQuery} $element The element.
-	 *
-	 */
-	var execElement = function execElement($element) {
-	    // Grab some data from $el.
-	    var elementData = $element.data();
-	
-	    // Misc:
-	    console.log("Look ma, there's an element, and its data attributes!");
-	    console.log($element);
-	    console.log(elementData);
-	};
-	
-	/**
-	 *
-	 * @private
-	 * @method initElement
-	 * @memberof example
-	 * @description This module would do something with your elements.
-	 *
-	 */
-	var initElement = function initElement() {
-	    var $notLoaded = $_jsElements.not(".is-initialized");
-	    var $element = null;
-	    var i = $notLoaded.length;
-	
-	    for (i; i--;) {
-	        $element = $_jsElements.eq(i);
-	
-	        $element.addClass("is-initialized");
-	
-	        execElement($element);
-	    }
-	};
-	
-	/******************************************************************************
-	 * Export
-	*******************************************************************************/
-	exports.default = example;
-
-/***/ }),
-/* 210 */
-/*!******************************!*\
-  !*** ./source/sass/app.scss ***!
-  \******************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "../css/app.css";
-
-/***/ }),
-/* 211 */
 /*!*******************************************************************!*\
   !*** ./~/chartjs-plugin-deferred/dist/chartjs-plugin-deferred.js ***!
   \*******************************************************************/
@@ -35498,6 +35145,412 @@
 	
 	})));
 
+
+/***/ }),
+/* 209 */
+/*!*******************************************!*\
+  !*** ./source/js/modules/interactions.js ***!
+  \*******************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _properjsHobo = __webpack_require__(/*! properjs-hobo */ 9);
+	
+	var _properjsHobo2 = _interopRequireDefault(_properjsHobo);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var $_applyBtn = null;
+	var $_form = null;
+	var $_hashParams = null;
+	var $_interest = null;
+	var $_opts = null;
+	var $_urlData = null;
+	
+	/**
+	 *
+	 * @public
+	 * @module interactions
+	 * @description Hook module for DOM interactions on buttons, charts and forms.
+	 *
+	 */
+	var interactions = {
+	    /**
+	     *
+	     * @public
+	     * @method init
+	     * @memberof charts
+	     * @description Method runs once when window loads.
+	     *
+	     */
+	    init: function init() {
+	        if (this.isActive()) {
+	            initBtns();
+	            fillForm(setFormTxt());
+	            formListener();
+	        }
+	    },
+	
+	
+	    /**
+	     *
+	     * @public
+	     * @method isActive
+	     * @memberof charts
+	     * @description Method informs of active status.
+	     * @returns {boolean}
+	     *
+	     */
+	    isActive: function isActive() {
+	        return this.getElements() >= 0;
+	    },
+	
+	
+	    /**
+	     *
+	     * @public
+	     * @method getElements
+	     * @memberof charts
+	     * @description Method queries DOM for this modules node.
+	     * @returns {number}
+	     *
+	     */
+	    getElements: function getElements() {
+	        $_applyBtn = (0, _properjsHobo2.default)("a[href='#apply']");
+	
+	        return $_applyBtn.length;
+	    }
+	};
+	
+	var initBtns = function initBtns() {
+	    /**
+	     *
+	     * @private
+	     * @method applyButton
+	     * @memberof interactions
+	     * @description Method adds undergrad & grad buttons to container when apply button is clicked.
+	     *
+	     */
+	    var btnContainer = (0, _properjsHobo2.default)("#landing .Index-page-content .sqs-block-button");
+	    var newBtns = "<div class=\"sqs-block-button-container--left\" data-alignment=\"left\" data-button-size=\"small\">" + "<a href=\"https://www.du.edu/korbel/admission/apply.html\" target=\"_blank\" class=\"sqs-block-button-element--small sqs-block-button-element\" style=\"margin:0 17px 17px 0;\">Graduate</a>" + "<a href=\"https://www.du.edu/admission-aid/undergraduate/index.html\" target=\"_blank\" class=\"sqs-block-button-element--small sqs-block-button-element\" style=\"margin:0 0 17px 0;\">Undergraduate</a>" + "</div>";
+	
+	    var appendBtns = function appendBtns() {
+	        $_applyBtn.remove();
+	        btnContainer.append(newBtns);
+	    };
+	
+	    var applyClick = function applyClick(list, event, fn) {
+	        for (var i = 0, len = list.length; i < len; i++) {
+	            list[i].addEventListener(event, fn, false);
+	        }
+	        return false;
+	    };
+	
+	    applyClick($_applyBtn, "click", appendBtns);
+	};
+	
+	/**
+	 *
+	 * @private
+	 * @method urlParams
+	 * @memberof interactions
+	 * @description Method gets parameters from url used in prefilling newsletter forms.
+	 * @returns {variable}
+	 *
+	 */
+	var urlParams = function urlParams() {
+	
+	    $_hashParams = window.location.hash.split("&"); // substr(1) to remove the `#`
+	
+	    for (var i = 0, len = $_hashParams.length; i < len; i++) {
+	        $_urlData = $_hashParams[i].split("=");
+	    }
+	
+	    return $_urlData;
+	};
+	
+	/**
+	 *
+	 * @private
+	 * @method fillForm
+	 * @memberof interactions
+	 * @description Method prefills select option based on url parameters.
+	 *
+	 */
+	var fillForm = function fillForm() {
+	
+	    //Pull in url parameters
+	    urlParams();
+	
+	    $_interest = $_urlData[1];
+	    var $_select = (0, _properjsHobo2.default)($_urlData[0].toString());
+	
+	    $_opts = $_select[0].children;
+	
+	    //loop through select options and select the one that matches interest
+	    for (var j = 0; j < $_opts.length; j++) {
+	        if ($_opts[j].value === $_interest) {
+	            $_opts[j].parentNode.selectedIndex = j;
+	        }
+	    }
+	};
+	
+	/**
+	 *
+	 * @private
+	 * @method setFormTxt
+	 * @memberof interactions
+	 * @description Method uses parameter from url to change label text for interest select field.
+	 *
+	 */
+	var setFormTxt = function setFormTxt() {
+	
+	    //Pull in url parameters
+	    urlParams();
+	
+	    $_form = (0, _properjsHobo2.default)("#mc-embedded-subscribe-form");
+	    $_interest = $_urlData[1];
+	    var $_select = (0, _properjsHobo2.default)($_urlData[0].toString());
+	
+	    if ($_interest === "Quantitative" || $_interest === "Qualitative") {
+	        $_select[0].parentNode.innerHTML = $_select[0].parentNode.innerHTML.replace("studies", "methods");
+	    } else if ($_interest === "Theory" || $_interest === "Practice") {
+	        $_select[0].parentNode.innerHTML = $_select[0].parentNode.innerHTML.replace("studies", "");
+	    } else {
+	        return;
+	    }
+	};
+	
+	/**
+	 *
+	 * @private
+	 * @method formListener
+	 * @memberof interactions
+	 * @description Method listens for changes to interest select options to adapt to changes.
+	 *
+	 */
+	var formListener = function formListener() {
+	
+	    //Pull in url parameters
+	    urlParams();
+	
+	    var $_select = (0, _properjsHobo2.default)("#mc-embedded-subscribe-form .select select");
+	
+	    var formChange = function formChange(e) {
+	        //reset select HTML so it can be changed below
+	        var $_label = e.currentTarget.parentNode;
+	        var $_selectHTML = "I'm interested in&nbsp;<select name=\"CURRICULUM\" class=\"\" id=\"mce-CURRICULUM\">" + "<option value=\"\"></option>" + "<option value=\"Quantitative\">Quantitative</option>" + "<option value=\"Qualitative\">Qualitative</option>" + "<option value=\"Theory\">Theory</option>" + "<option value=\"Practice\">Practice</option>" + "<option value=\"International\">International</option>" + "<option value=\"Domestic\">Domestic</option>" + "</select>&nbsp;studies at the Korbel School.";
+	
+	        $_label.innerHTML = $_selectHTML;
+	
+	        //get value of selected option
+	        $_interest = e.currentTarget.selectedOptions[0].value;
+	
+	        if ($_interest === "Quantitative" || $_interest === "Qualitative") {
+	            $_label.innerHTML = $_label.innerHTML.replace("studies", "methods");
+	        } else if ($_interest === "Theory" || $_interest === "Practice") {
+	            $_label.innerHTML = $_label.innerHTML.replace("studies", "");
+	        } else {
+	            return;
+	        }
+	
+	        //get new (just generated) option HTML
+	        $_opts = (0, _properjsHobo2.default)("#mce-CURRICULUM option");
+	
+	        //reset the index to stored select option (from before HTML was changed)
+	        for (var j = 0; j < $_opts.length; j++) {
+	            if ($_opts[j].value === $_interest) {
+	                $_opts[j].parentNode.selectedIndex = j;
+	                $_opts[j].parentNode.value = $_interest;
+	            }
+	        }
+	
+	        //rebind the event to the dynamically created select element
+	        $_select.onchange = formListener();
+	    };
+	
+	    $_select.on("change", formChange);
+	};
+	
+	/******************************************************************************
+	 * Export
+	*******************************************************************************/
+	exports.default = interactions;
+
+/***/ }),
+/* 210 */
+/*!**************************************!*\
+  !*** ./source/js/modules/example.js ***!
+  \**************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _core = __webpack_require__(/*! ../core */ 1);
+	
+	var core = _interopRequireWildcard(_core);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	// Here's jQuery in case you need it. If you're just doing DOM manipulation, you
+	// probably won't need it. Recommend using core.dom module to handle node caching.
+	// import $ from "jquery/dist/jquery";
+	
+	
+	var $_jsElements = null;
+	
+	/**
+	 *
+	 * @public
+	 * @module example
+	 * @description An example hook module.
+	 *
+	 */
+	// This is a module using an object literal pattern.
+	// It's an easy way to organize your custom JavaScript into modules with methods.
+	// Since this system uses Webpack, you can reuse other modules and dependencies
+	// by importing them into the module.
+	
+	
+	var example = {
+	    /**
+	     *
+	     * @public
+	     * @method init
+	     * @memberof example
+	     * @description Method runs once when window loads.
+	     *
+	     */
+	    init: function init() {
+	        if (this.isActive()) {
+	            initElement();
+	        }
+	        // console.log( "example module: initialized" );
+	    },
+	
+	
+	    /**
+	     *
+	     * @public
+	     * @method isActive
+	     * @memberof example
+	     * @description Method informs of active status.
+	     * @returns {boolean}
+	     *
+	     */
+	    isActive: function isActive() {
+	        return this.getElements() > 0;
+	    },
+	
+	
+	    /**
+	     *
+	     * @public
+	     * @method unload
+	     * @memberof example
+	     * @description Method performs unloading actions for this module.
+	     *
+	     */
+	    unload: function unload() {
+	        // Typically unloading and tearing down isn't required unless you're
+	        // using a complete AJAX Squarespace website that functions like
+	        // a single page application.
+	        this.teardown();
+	    },
+	
+	
+	    /**
+	     *
+	     * @public
+	     * @method teardown
+	     * @memberof example
+	     * @description Method performs cleanup after this module. Removes events, null vars etc...
+	     *
+	     */
+	    teardown: function teardown() {
+	        $_jsElements = null;
+	    },
+	
+	
+	    /**
+	     *
+	     * @public
+	     * @method getElements
+	     * @memberof example
+	     * @description Method queries DOM for this modules node.
+	     * @returns {number}
+	     *
+	     */
+	    getElements: function getElements() {
+	        $_jsElements = core.dom.body.find(".js-element");
+	
+	        return $_jsElements.length;
+	    }
+	};
+	
+	/**
+	 *
+	 * @private
+	 * @method execElement
+	 * @memberof example
+	 * @description Handles execution of something.
+	 * @param {jQuery} $element The element.
+	 *
+	 */
+	var execElement = function execElement($element) {
+	    // Grab some data from $el.
+	    var elementData = $element.data();
+	
+	    // Misc:
+	    console.log("Look ma, there's an element, and its data attributes!");
+	    console.log($element);
+	    console.log(elementData);
+	};
+	
+	/**
+	 *
+	 * @private
+	 * @method initElement
+	 * @memberof example
+	 * @description This module would do something with your elements.
+	 *
+	 */
+	var initElement = function initElement() {
+	    var $notLoaded = $_jsElements.not(".is-initialized");
+	    var $element = null;
+	    var i = $notLoaded.length;
+	
+	    for (i; i--;) {
+	        $element = $_jsElements.eq(i);
+	
+	        $element.addClass("is-initialized");
+	
+	        execElement($element);
+	    }
+	};
+	
+	/******************************************************************************
+	 * Export
+	*******************************************************************************/
+	exports.default = example;
+
+/***/ }),
+/* 211 */
+/*!******************************!*\
+  !*** ./source/sass/app.scss ***!
+  \******************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "../css/app.css";
 
 /***/ })
 /******/ ]);

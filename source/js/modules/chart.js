@@ -134,7 +134,7 @@ const initChart = function ( ) {
             },
             plugins: {
                 deferred: {
-                    delay: 500,
+                    delay: 375,
                     yOffset: "50%"
                 }
             },
