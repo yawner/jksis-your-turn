@@ -26,7 +26,7 @@ const interactions = {
     init () {
         if ( this.isActive() ) {
             initBtns();
-            fillForm( setFormTxt() );
+            fillForm();
             formListener();
         }
     },
@@ -130,17 +130,21 @@ const fillForm = function ( ) {
     //Pull in url parameters
     urlParams();
 
-    $_interest = $_urlData[ 1 ];
-    const $_select = $( $_urlData[ 0 ].toString() );
+    $_interest = $_urlData[ 1 ].replace( "+", " " );
+    const $_select = $( "." + $_urlData[ 0 ].substr(1) );
 
-    $_opts = $_select[ 0 ].children;
+    $_select.each( function ( el ) {
 
-    //loop through select options and select the one that matches interest
-    for ( let j = 0; j < $_opts.length; j++ ) {
-        if ( $_opts[ j ].value === $_interest ) {
-            $_opts[ j ].parentNode.selectedIndex = j;
+        $_opts = el.children;
+
+        //loop through select options and select the one that matches interest
+        for ( let j = 0; j < $_opts.length; j++ ) {
+            if ( $_opts[ j ].innerText === $_interest ) {
+                $_opts[ j ].parentNode.selectedIndex = j;
+            }
         }
-    }
+
+    });
 
 };
 
@@ -160,7 +164,7 @@ const setFormTxt = function ( ) {
 
     $_form = $("#mc-embedded-subscribe-form");
     $_interest = $_urlData[ 1 ];
-    const $_select = $( $_urlData[ 0 ].toString() );
+    const $_select = $( "." + $_urlData[ 0 ].substr(1) );
 
     if ( $_interest === "Quantitative" || $_interest === "Qualitative" ) {
         $_select[ 0 ].parentNode.innerHTML = $_select[ 0 ].parentNode.innerHTML.replace("studies", "methods");
@@ -178,61 +182,69 @@ const setFormTxt = function ( ) {
  * @private
  * @method formListener
  * @memberof interactions
- * @description Method listens for changes to interest select options to adapt to changes.
+ * @description Method listens for changes to select options.
  *
  */
 const formListener = function ( ) {
 
     //Pull in url parameters
     urlParams();
-
-    const $_select = $( "#mc-embedded-subscribe-form .select select" );
-
-    const formChange = function ( e ) {
-        //reset select HTML so it can be changed below
-        const $_label = e.currentTarget.parentNode;
-        const $_selectHTML = "I'm interested in&nbsp;<select name=\"CURRICULUM\" class=\"\" id=\"mce-CURRICULUM\">" +
-                                "<option value=\"\"></option>" +
-                                "<option value=\"Quantitative\">Quantitative</option>" +
-                                "<option value=\"Qualitative\">Qualitative</option>" +
-                                "<option value=\"Theory\">Theory</option>" +
-                                "<option value=\"Practice\">Practice</option>" +
-                                "<option value=\"International\">International</option>" +
-                                "<option value=\"Domestic\">Domestic</option>" +
-                             "</select>&nbsp;studies at the Korbel School.";
-
-        $_label.innerHTML = $_selectHTML;
-
-        //get value of selected option
-        $_interest = e.currentTarget.selectedOptions[ 0 ].value;
-
-        if ( $_interest === "Quantitative" || $_interest === "Qualitative" ) {
-            $_label.innerHTML = $_label.innerHTML.replace("studies", "methods");
-        } else if ( $_interest === "Theory" || $_interest === "Practice" ) {
-            $_label.innerHTML = $_label.innerHTML.replace("studies", "");
-        } else {
-            return;
-        }
-
-        //get new (just generated) option HTML
-        $_opts = $("#mce-CURRICULUM option");
-
-        //reset the index to stored select option (from before HTML was changed)
-        for ( let j = 0; j < $_opts.length; j++ ) {
-            if ( $_opts[ j ].value === $_interest ) {
-                $_opts[ j ].parentNode.selectedIndex = j;
-                $_opts[ j ].parentNode.value = $_interest;
-            }
-        }
-
-        //rebind the event to the dynamically created select element
-        $_select.onchange = formListener();
-    };
+    const $_select = $( "#mc-embedded-subscribe-form .select ." + $_urlData[ 0 ].substr(1) );
 
     $_select.on( "change", formChange );
 
 };
 
+
+/**
+ *
+ * @private
+ * @method formChange
+ * @memberof interactions
+ * @description Method changes select field.
+ * @param {e} $e the event
+ *
+ */
+const formChange = function ( $e ) {
+
+    //reset select HTML so it can be changed below
+    const $_label = $e.currentTarget.parentNode;
+    const $_selectHTML = "I'm interested in&nbsp;<select name=\"mce-group[3845]\" class=\"REQ_CSS mce-IDEAS\" id=\"mce-group[3845]\">" +
+                            "<option value=\"\"></option>" +
+                            "<option value=\"1\">Quantitative</option>" +
+                            "<option value=\"2\">Qualitative</option>" +
+                            "<option value=\"4\">Theory</option>" +
+                            "<option value=\"8\">Practice</option>" +
+                            "<option value=\"16\">International</option>" +
+                            "<option value=\"32\">Domestic</option>" +
+                         "</select>&nbsp;studies at the Korbel School.";
+
+    $_label.innerHTML = $_selectHTML;
+
+    //store values of selected options for submission later
+    $_interest = $e.currentTarget.selectedOptions[ 0 ].innerText;
+    const $_origVal = $e.currentTarget.selectedOptions[ 0 ].value;
+
+    if ( $_interest === "Quantitative" || $_interest === "Qualitative" ) {
+        $_label.innerHTML = $_label.innerHTML.replace("studies", "methods");
+    } else if ( $_interest === "Theory" || $_interest === "Practice" ) {
+        $_label.innerHTML = $_label.innerHTML.replace("studies", "");
+    }
+
+    //get new (just generated) option HTML
+    $_opts = $(".mce-IDEAS option");
+
+    //reset the index to stored select option (from before HTML was changed)
+    for ( let j = 0; j < $_opts.length; j++ ) {
+        if ( $_opts[ j ].value === $_origVal ) {
+            $_opts[ j ].parentNode.selectedIndex = j;
+            $_opts[ j ].parentNode.value = $_origVal;
+        }
+    }
+
+    //rebind the event to the dynamically created select element
+    formListener();
+};
 
 
 /******************************************************************************

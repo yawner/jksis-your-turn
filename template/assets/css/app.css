@@ -535,6 +535,9 @@
  * Custom CSS styles that relate to the footer area.
  * Note: Not all Squarespace templates have the same classes/IDs.
 *******************************************************************************/
+.Footer button, .Footer input, .Footer optgroup, .Footer select, .Footer textarea {
+  color: #1a1a1a; }
+
 /******************************************************************************
  * Header
  *
@@ -651,6 +654,14 @@
  *
  * Custom CSS styles that relate to Index pages.
 *******************************************************************************/
+.collection-type-index .Index-page-content h2:first-of-type::after {
+  border-top: .0666em solid;
+  content: "";
+  display: block;
+  margin: .544em 0 .544em;
+  position: relative;
+  width: 24.5%; }
+
 /******************************************************************************
  * Squarespace
 *******************************************************************************/

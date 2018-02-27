@@ -175,7 +175,7 @@ const initChart = function ( ) {
          * on ideas page load to pre-fill email newsletter form
          *
          */
-        const relUrl = "/ideas#mce-CURRICULUM=" + $_subject;
+        const relUrl = "/ideas#mce-IDEAS=" + $_subject;
 
         window.location.href = relUrl;
 
